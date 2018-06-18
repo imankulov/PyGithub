@@ -34,6 +34,7 @@
 import github.GithubObject
 
 import github.Issue
+import github.Label
 import github.NamedUser
 
 
@@ -54,12 +55,36 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
         return self._actor.value
 
     @property
+    def assignee(self):
+        """
+        :type: :class:`github.NamedUser.NamedUser`
+        """
+        self._completeIfNotSet(self._assignee)
+        return self._assignee.value
+
+    @property
+    def assigner(self):
+        """
+        :type: :class:`github.NamedUser.NamedUser`
+        """
+        self._completeIfNotSet(self._assigner)
+        return self._assigner.value
+
+    @property
     def commit_id(self):
         """
         :type: string
         """
         self._completeIfNotSet(self._commit_id)
         return self._commit_id.value
+
+    @property
+    def commit_url(self):
+        """
+        :type: string
+        """
+        self._completeIfNotSet(self._commit_url)
+        return self._commit_url.value
 
     @property
     def created_at(self):
@@ -94,6 +119,14 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
         return self._issue.value
 
     @property
+    def label(self):
+        """
+        :type: string
+        """
+        self._completeIfNotSet(self._label)
+        return self._label.value
+
+    @property
     def url(self):
         """
         :type: string
@@ -103,18 +136,28 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
 
     def _initAttributes(self):
         self._actor = github.GithubObject.NotSet
+        self._assignee = github.GithubObject.NotSet
+        self._assigner = github.GithubObject.NotSet
         self._commit_id = github.GithubObject.NotSet
+        self._commit_url = github.GithubObject.NotSet
         self._created_at = github.GithubObject.NotSet
         self._event = github.GithubObject.NotSet
         self._id = github.GithubObject.NotSet
         self._issue = github.GithubObject.NotSet
+        self._label = github.GithubObject.NotSet
         self._url = github.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "actor" in attributes:  # pragma no branch
             self._actor = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["actor"])
+        if "assignee" in attributes:  # pragma no branch
+            self._assignee = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["assignee"])
+        if "assigner" in attributes:  # pragma no branch
+            self._assigner = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["assigner"])
         if "commit_id" in attributes:  # pragma no branch
             self._commit_id = self._makeStringAttribute(attributes["commit_id"])
+        if "commit_url" in attributes:  # pragma no branch
+            self._commit_id = self._makeStringAttribute(attributes["commit_url"])
         if "created_at" in attributes:  # pragma no branch
             self._created_at = self._makeDatetimeAttribute(attributes["created_at"])
         if "event" in attributes:  # pragma no branch
@@ -123,5 +166,7 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
             self._id = self._makeIntAttribute(attributes["id"])
         if "issue" in attributes:  # pragma no branch
             self._issue = self._makeClassAttribute(github.Issue.Issue, attributes["issue"])
+        if "label" in attributes:  # pragma no branch
+            self._label = self._makeClassAttribute(github.Label.Label, attributes["label"])
         if "url" in attributes:  # pragma no branch
             self._url = self._makeStringAttribute(attributes["url"])
