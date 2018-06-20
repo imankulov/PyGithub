@@ -51,7 +51,6 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
         """
         :type: :class:`github.NamedUser.NamedUser`
         """
-        self._completeIfNotSet(self._actor)
         return self._actor.value
 
     @property
@@ -59,7 +58,6 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
         """
         :type: :class:`github.NamedUser.NamedUser`
         """
-        self._completeIfNotSet(self._assignee)
         return self._assignee.value
 
     @property
@@ -67,7 +65,6 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
         """
         :type: :class:`github.NamedUser.NamedUser`
         """
-        self._completeIfNotSet(self._assigner)
         return self._assigner.value
 
     @property
@@ -75,7 +72,6 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
         """
         :type: string
         """
-        self._completeIfNotSet(self._commit_id)
         return self._commit_id.value
 
     @property
@@ -83,7 +79,6 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
         """
         :type: string
         """
-        self._completeIfNotSet(self._commit_url)
         return self._commit_url.value
 
     @property
@@ -123,7 +118,6 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
         """
         :type: string
         """
-        self._completeIfNotSet(self._label)
         return self._label.value
 
     @property
